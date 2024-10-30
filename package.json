@@ -1,0 +1,26 @@
+{
+  "name": "nextjs-comic-site",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "zustand": "^3.5.10",
+    "zod": "^3.11.6",
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "@mui/material": "^5.0.0",
+    "tailwindcss": "^2.2.19",
+    "autoprefixer": "^10.3.7"
+  },
+  "devDependencies": {
+    "postcss": "^8.3.11"
+  }
+}
