@@ -4,7 +4,16 @@ import { comicSchema, userSchema } from '../utils/validation';
 import { fetchComics } from '../services/comicService';
 import { fetchUserData } from '../services/userService';
 
-const useStore = create((set) => ({
+const useStore = create<{
+  comics: Array<{ id: string; title: string; description: string }>;
+  user: { name: string; email: string };
+  fetchComics: () => Promise<void>;
+  addComic: (comic: { id: string; title: string; description: string }) => void;
+  updateComic: (updatedComic: { id: string; title: string; description: string }) => void;
+  deleteComic: (comicId: string) => void;
+  fetchUserData: () => Promise<void>;
+  updateUser: (userData: { name: string; email: string }) => void;
+}>((set) => ({
   comics: [],
   user: {
     name: '',
@@ -32,14 +41,15 @@ const useStore = create((set) => ({
   fetchUserData: async () => {
     try {
       const userData = await fetchUserData();
-      set({ user: userSchema.parse(userData) });
+      const parsedUser = userSchema.parse(userData);
+      set({ user: { name: parsedUser.name || '', email: parsedUser.email || '' } });
     } catch (error) {
       console.error('Failed to fetch user data:', error);
     }
   },
   updateUser: (userData) => {
     const parsedUser = userSchema.parse(userData);
-    set({ user: parsedUser });
+    set({ user: { name: parsedUser.name || '', email: parsedUser.email || '' } });
   },
 }));
 
